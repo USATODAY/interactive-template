@@ -10,14 +10,25 @@ Copyright 2015 USA TODAY. All rights reserved. No part of these materials may be
 This template usit the [Grunt Init](http://gruntjs.com/project-scaffolding) project scaffolding tool. To use it, you'll need NodeJS and Grunt installed.
 
 To install node with Hombrew:
-`brew install node`
+````
+brew install node
+````
 
 Or head over to the [Node website](http://nodejs.org/) and install from there.
 Once Node is installed, install Grunt with
-`npm install -g grunt-cli`
+```
+npm install -g grunt-cli
+```
+
+And then install grunt-init with 
+```
+npm install -g grunt-init
+```
 
 After the project is set up, you'll also need Bower. Install with 
-`npm install -g bower`
+```
+npm install -g bower
+```
 
 
 ##Using this project template
