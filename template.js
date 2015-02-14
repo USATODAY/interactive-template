@@ -61,7 +61,7 @@ exports.template = function(grunt, init, done) {
       "grunt-contrib-jshint": "^0.10.0",
       "grunt-contrib-jst": "^0.6.0",
       "grunt-contrib-requirejs": "^0.4.4",
-      "grunt-contrib-sass": "^0.7.3",
+      "grunt-sass": "^0.18.0",
       "grunt-contrib-uglify": "^0.4.0",
       "grunt-contrib-watch": "~0.5.3",
       "grunt-ftp": "^1.0.1",

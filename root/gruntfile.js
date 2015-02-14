@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     sass: {
       dev: {
         options: {
-          style: 'expanded'
+          outputStyle: 'expanded'
         },
         files: {
           '<%=config.tmp%>project.css': '<%=config.src%>style/scss/project.scss'
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          style: 'compressed',
+          outputStyle: 'compressed',
           sourcemap: 'none'
         },
         files: {
@@ -354,7 +354,7 @@ module.exports = function(grunt) {
   // Load the plugins
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-jshint');
