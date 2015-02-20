@@ -147,14 +147,11 @@ module.exports = function(grunt) {
     requirejs: {
       dev: {
         options: {
-          "modules": [{
-            "name": "main",
-          }],
+          "name": "main",
           "baseUrl": "<%=config.src%>js",
-          "dir": "<%=config.build%>js",
+          "out": "<%=config.build%>js/main.js",
           "preserveLicenseComments": false,
           "optimize": "none",
-          // "optimize": "uglify2",
           "useStrict": true,
           "uglify2": {
             "beautify": true,
@@ -181,31 +178,21 @@ module.exports = function(grunt) {
             'underscore': {
               "exports": '_'
             },
-            "jquery_ui_touch_punch": {
-              "deps": [
-                "jquery",
-                "jquery_ui"
-              ],
-              "exports": "jQuery"
-            }
           }
         }
       },
       deploy: {
         options: {
-          "modules": [{
-            "name": "main",
-            "exclude": [
-              "jquery",
-              "underscore",
-              "backbone"
+          "name": "main",
+          "exclude": [
+            "jquery",
+            "underscore",
+            "backbone"
             ]
           }],
           "baseUrl": "<%=config.src%>js",
-          "dir": "<%=config.build%>js",
-          // "generateSourceMaps": true,
-          "preserveLicenseComments": false,
-          // "optimize": "none",
+          "out": "<%=config.build%>js/main.js",
+          "preserveLicenseComments": false,   
           "optimize": "uglify2",
           "useStrict": true,
           "uglify2": {
@@ -232,13 +219,6 @@ module.exports = function(grunt) {
             },
             'underscore': {
               "exports": '_'
-            },
-            "jquery_ui_touch_punch": {
-              "deps": [
-                "jquery",
-                "jquery_ui"
-              ],
-              "exports": "jQuery"
             }
           }
         }
