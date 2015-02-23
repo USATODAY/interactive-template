@@ -189,7 +189,7 @@ module.exports = function(grunt) {
             "underscore",
             "backbone"
             ]
-          }],
+          },
           "baseUrl": "<%=config.src%>js",
           "out": "<%=config.build%>js/main.js",
           "preserveLicenseComments": false,   
