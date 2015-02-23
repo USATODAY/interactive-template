@@ -222,7 +222,6 @@ module.exports = function(grunt) {
             }
           }
         }
-      }
     },
 
     copy: {
