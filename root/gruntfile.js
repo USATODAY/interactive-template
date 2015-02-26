@@ -2,10 +2,15 @@ var fs = require('fs');
 var osenv = require('osenv');
 var home = osenv.home();
 
-var secrets = JSON.parse(fs.readFileSync(home + '/.secrets/secrets.json', 'utf8'));
 
 module.exports = function(grunt) {
-
+  try {
+    var secrets = grunt.file.readJSON(home + '/.secrets/secrets.json');
+  }
+  catch(e) {
+    grunt.log.warn("USA TODAY's FTP credentials aren't stored in your home directory. grunt deploy won't work");
+    var secrets = {host: '', akamai_1: ''};
+  }
   require('time-grunt')(grunt);
   // Project configuration.
   grunt.initConfig({
