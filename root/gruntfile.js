@@ -168,12 +168,9 @@ module.exports = function(grunt) {
             "underscore": '../../bower_components/underscore/underscore',
             "jquery_ui": "lib/jquery-ui.min",
             "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
-            "analytics": "lib/analytics",
-            "mobile_detect": "lib/mobile-detect",
+            "api/analytics": "lib/analytics",
             "d3": '../../bower_components/d3/d3',
             "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
-              // "api/ads": "api/ads",
-              // "api/analytics": "api/analytics"
           },
           "shim": {
             'backbone': {
@@ -192,7 +189,8 @@ module.exports = function(grunt) {
           "exclude": [
             "jquery",
             "underscore",
-            "backbone"
+            "backbone",
+            "api/analytics"
           ],
           "baseUrl": "<%=config.src%>js",
           "out": "<%=config.build%>js/main.js",
@@ -209,12 +207,9 @@ module.exports = function(grunt) {
             "underscore": '../../bower_components/underscore/underscore',
             "jquery_ui": "lib/jquery-ui.min",
             "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
-            "analytics": "lib/analytics",
-            "mobile_detect": "lib/mobile-detect",
+            "api/analytics": "lib/analytics",
             "d3": '../../bower_components/d3/d3',
             "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
-              // "api/ads": "api/ads",
-              // "api/analytics": "api/analytics"
           },
           "shim": {
             'backbone': {
