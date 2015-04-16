@@ -1,15 +1,16 @@
 var fs = require('fs');
 var osenv = require('osenv');
 var home = osenv.home();
+var secrets;
 
 
 module.exports = function(grunt) {
   try {
-    var secrets = grunt.file.readJSON(home + '/.secrets/secrets.json');
+    secrets = grunt.file.readJSON(home + '/.secrets/secrets.json');
   }
   catch(e) {
     grunt.log.warn("USA TODAY's FTP credentials aren't stored in your home directory. grunt deploy won't work");
-    var secrets = {host: '', akamai_1: ''};
+    secrets = {host: '', akamai_1: ''};
   }
   require('time-grunt')(grunt);
   // Project configuration.
@@ -63,7 +64,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         scripturl: true,
-        ignores: ['<%=config.src%>js/lib/*.js']
+        ignores: ['<%=config.src%>js/lib/*.js', '<%=config.src%>js/templates.js']
       },
       all: ['Gruntfile.js', 'test/*.js', '<%=config.src%>js/**/*.js']
     },
@@ -345,8 +346,8 @@ module.exports = function(grunt) {
 
   // Default task(s).
 
-  grunt.registerTask('default', ['clean:dev', 'jst', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'clean:tmp', 'browserSync:dev', 'watch']);
-  grunt.registerTask('test', ['clean:dev', 'jst', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'copy:test', 'clean:tmp', 'browserSync:test', 'watch']);
-  grunt.registerTask('build', ['clean:dev', 'jst', 'requirejs:deploy', 'sass:build', 'autoprefixer:build', 'copy:main', 'clean:tmp'])
+  grunt.registerTask('default', ['clean:dev', 'jst', 'jshint', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'clean:tmp', 'browserSync:dev', 'watch']);
+  grunt.registerTask('test', ['clean:dev', 'jst', 'jshint', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'copy:test', 'clean:tmp', 'browserSync:test', 'watch']);
+  grunt.registerTask('build', ['clean:dev', 'jst', 'jshint', 'requirejs:deploy', 'sass:build', 'autoprefixer:build', 'copy:main', 'clean:tmp']);
   grunt.registerTask('deploy', ['build', 'copy:deploy', 'ftp:upload1', 'ftp:upload2', 'ftp:upload3', 'clean:deploy']);
 };
