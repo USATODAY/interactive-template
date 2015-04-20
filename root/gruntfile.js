@@ -112,7 +112,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%=config.src%>js/**/*.js'],
-        tasks: ['requirejs:dev']
+        tasks: ['jshint', 'requirejs:dev']
       },
       jst: {
         files: ['<%=config.src%>templates/*'],
