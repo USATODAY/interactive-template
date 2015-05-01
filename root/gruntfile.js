@@ -31,6 +31,9 @@ module.exports = function(grunt) {
     },
     'underscore': {
       "exports": '_'
+    },
+    'mapbox': {
+      "exports": "L"
     }
   };
 
