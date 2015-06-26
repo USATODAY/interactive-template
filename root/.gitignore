@@ -58,7 +58,7 @@ docs/_build/
 **/.sass-cache/
 **/bower_components
 **/.tmp
-
+src/img
 deps/
 node_modules/
 *.py[cod]
