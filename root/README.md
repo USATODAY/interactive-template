@@ -20,7 +20,3 @@ and install Bower with
 `npm install -g bower`
 
 Once those dependencies are set up, from this repository run `npm install`, then run `grunt`
-
-
-###Live version:
-http://www.gannett-cdn.com/experiments/usatoday/{%=year%}/{%=month%}/{%=name%}/

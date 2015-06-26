@@ -1,16 +1,43 @@
 var fs = require('fs');
 var osenv = require('osenv');
 var home = osenv.home();
+var secrets;
 
 
 module.exports = function(grunt) {
   try {
-    var secrets = grunt.file.readJSON(home + '/.secrets/secrets.json');
+    secrets = grunt.file.readJSON(home + '/.secrets/secrets.json');
   }
   catch(e) {
     grunt.log.warn("USA TODAY's FTP credentials aren't stored in your home directory. grunt deploy won't work");
-    var secrets = {host: '', akamai_1: ''};
+    secrets = {host: '', akamai_1: ''};
   }
+
+  var require_paths =  {
+    "jquery": '../../bower_components/jquery/dist/jquery',
+    "backbone": '../../bower_components/backbone/backbone',
+    "underscore": '../../bower_components/underscore/underscore',
+    "jquery_ui": "lib/jquery-ui.min",
+    "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
+    "api/analytics": "lib/analytics",
+    "d3": '../../bower_components/d3/d3',
+    "angular": '../../bower_components/angular/angular',
+    "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
+  };
+
+  var require_shim = {
+    'backbone': {
+      "deps": ['underscore', 'jquery'],
+      "exports": 'Backbone'
+    },
+    'underscore': {
+      "exports": '_'
+    },
+    'mapbox': {
+      "exports": "L"
+    }
+  };
+
   require('time-grunt')(grunt);
   // Project configuration.
   grunt.initConfig({
@@ -63,7 +90,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         scripturl: true,
-        ignores: ['<%=config.src%>js/lib/*.js']
+        ignores: ['<%=config.src%>js/lib/*.js', '<%=config.src%>js/templates.js']
       },
       all: ['Gruntfile.js', 'test/*.js', '<%=config.src%>js/**/*.js']
     },
@@ -89,7 +116,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['<%=config.src%>js/**/*.js'],
-        tasks: ['requirejs:dev']
+        tasks: ['jshint', 'requirejs:dev']
       },
       jst: {
         files: ['<%=config.src%>templates/*'],
@@ -162,29 +189,8 @@ module.exports = function(grunt) {
             "beautify": true,
             "toplevel": true
           },
-          "paths": {
-            "jquery": '../../bower_components/jquery/dist/jquery',
-            "backbone": '../../bower_components/backbone/backbone',
-            "underscore": '../../bower_components/underscore/underscore',
-            "jquery_ui": "lib/jquery-ui.min",
-            "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
-            "api/analytics": "lib/analytics",
-            "d3": '../../bower_components/d3/d3',
-            "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed',
-            "angular": '../../bower_components/angular/angular'
-          },
-          "shim": {
-            'backbone': {
-              "deps": ['underscore', 'jquery'],
-              "exports": 'Backbone'
-            },
-            'underscore': {
-              "exports": '_'
-            },
-            'angular': {
-                "exports": "angular"
-            }
-          }
+          "paths": require_paths,
+          "shim": require_shim
         }
       },
       deploy: {
@@ -205,29 +211,8 @@ module.exports = function(grunt) {
             "beautify": true,
             "toplevel": true
           },
-          "paths": {
-            "jquery": '../../bower_components/jquery/dist/jquery',
-            "backbone": '../../bower_components/backbone/backbone',
-            "underscore": '../../bower_components/underscore/underscore',
-            "jquery_ui": "lib/jquery-ui.min",
-            "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
-            "api/analytics": "lib/analytics",
-            "d3": '../../bower_components/d3/d3',
-            "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed',
-            "angular": '../../bower_components/angular/angular'
-          },
-          "shim": {
-            'backbone': {
-              "deps": ['underscore', 'jquery'],
-              "exports": 'Backbone'
-            },
-            'underscore': {
-              "exports": '_'
-            },
-            'angular': {
-                "exports": "angular"
-            }
-          }
+          "paths": require_paths,
+          "shim": require_shim
         }
       }
     },
@@ -353,8 +338,8 @@ module.exports = function(grunt) {
 
   // Default task(s).
 
-  grunt.registerTask('default', ['clean:dev', 'jst', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'clean:tmp', 'browserSync:dev', 'watch']);
-  grunt.registerTask('test', ['clean:dev', 'jst', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'copy:test', 'clean:tmp', 'browserSync:test', 'watch']);
-  grunt.registerTask('build', ['clean:dev', 'jst', 'requirejs:deploy', 'sass:build', 'autoprefixer:build', 'copy:main', 'clean:tmp'])
+  grunt.registerTask('default', ['clean:dev', 'jst', 'jshint', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'clean:tmp', 'browserSync:dev', 'watch']);
+  grunt.registerTask('test', ['clean:dev', 'jst', 'jshint', 'requirejs:dev', 'sass:dev', 'autoprefixer:dev', 'copy:main', 'copy:test', 'clean:tmp', 'browserSync:test', 'watch']);
+  grunt.registerTask('build', ['clean:dev', 'jst', 'jshint', 'requirejs:deploy', 'sass:build', 'autoprefixer:build', 'copy:main', 'clean:tmp']);
   grunt.registerTask('deploy', ['build', 'copy:deploy', 'ftp:upload1', 'ftp:upload2', 'ftp:upload3', 'clean:deploy']);
 };
