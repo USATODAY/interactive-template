@@ -112,6 +112,95 @@ define(
 
 ```
 
+###Angular support
+
+The most recent version of this template includes Angular as a potential dev dependency (as the `angular` module).
+
+Running angular requires a little bit of custom configuration. Specifically, the angular app will need to be manually kicked off via `angular.bootstrap` after all of the pieces of the app have been registered.
+
+For example, with HTML markup that looks like this: 
+
+```html
+<div id="test-app">
+  <div class="page-wrap card" ng-controller="TestController as test">
+    <h1>angular-test</h1>
+    <p class="chatter">{{test.chatter}}</p>
+    <div class="button" ng-click="test.alert()">Let's Go!</div>
+  </div>
+</div>
+```
+
+A basic angular could be set up like this:
+
+```javascript
+define(
+    [
+    'jquery',
+    'underscore',
+    'templates',
+    'angular'
+    ],
+    function(jQuery, _, templates, angular){
+        return {
+            init: function() {
+                var testApp = angular.module("testapp", []);
+                
+                testApp.controller('TestController', function() {
+                    this.alert = function() {
+                        window.alert("it worked");
+                    };
+
+                    this.chatter = "Hello world 2";
+                });
+                // this is where the app gets kicked off. Replaces the typical ng-app property.
+                angular.bootstrap(document.getElementById('test-app'), ['testapp']);
+
+            }
+        }
+});
+```
+
+If you'd like to split out the different pieces of your app into require-able modules, angular may be a little picky about what gets required where. You'll want to make sure all of the parts of the module (controllers, directives, etc) are required and registered before the `angular.bootstrap` call is made.
+
+Example:
+
+```javascript
+// app.js
+
+define(
+    [
+    'jquery',
+    'underscore',
+    'templates',
+    'angular',
+    'controllers/testController'
+    ],
+    function(jQuery, _, templates, angular, testController){
+        return {
+            init: function() {
+                var testApp = angular.module("testapp", []);
+                
+                testApp.controller('TestController', testController);
+                angular.bootstrap(document.getElementById('test-app'), ['testapp']);
+
+            }
+        }
+});
+```
+
+```javascript
+// controllers/testController.js
+define([], function() {
+    return function() {
+        this.alert = function() {
+            window.alert("it worked");
+        };
+
+        this.chatter = "Hello world 2";
+    }
+});
+```
+
 ##Deploying for a USA TODAY static page
 In order to build a deployable version of your css and javascript files, run 
 

@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
     "api/analytics": "lib/analytics",
     "d3": '../../bower_components/d3/d3',
+    "angular": '../../bower_components/angular/angular',
     "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
   };
 
