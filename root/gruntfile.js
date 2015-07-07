@@ -35,6 +35,9 @@ module.exports = function(grunt) {
     },
     'mapbox': {
       "exports": "L"
+    },
+    'angular': {
+     "exports": "angular"
     }
   };
 
