@@ -1,4 +1,4 @@
-#USAT Interactive template
+# USAT Interactive template
 
 A quick Grunt Init template for creating an interactive, USA TODAY-style. This is an opinionated interactive template that will set up a new project with some basic biolerplate, tools and dependencies for building and deploying an interactive on a usatoday.com static page.
 
@@ -9,7 +9,7 @@ Happy interactive-building!
 
 Copyright 2015 USA TODAY. All rights reserved. No part of these materials may be reproduced, modified, stored in a retrieval system, or retransmitted, in any form or by any means, electronic, mechanical or otherwise, without prior written permission from USA TODAY.
 
-##Dependencies
+## Dependencies
 
 This template uses the [Grunt Init](http://gruntjs.com/project-scaffolding) project scaffolding tool. To use it, you'll need NodeJS and Grunt installed.
 
@@ -35,7 +35,7 @@ npm install -g bower
 ```
 
 
-##Installing this template
+## Installing this template
 
 First clone this repo with: 
 ```
@@ -49,16 +49,16 @@ Then to get setup to use this, `cd` into this repo, and run
 source setup.sh
 ```
 
-##Keeping this template updated
+## Keeping this template updated
 It is a good idea to make sure you have the most recent version of this template.
 
 `cd` into the directory where you originally cloned this project and `git pull`. You are now good to go.
 
-##Using the template
+## Using the template
 To start a new project, simple create your project directory, `cd` into that directory, and run `grunt-init interactive-template`. Follow the prompts, and let the magic happen. 
 Finally, install depnedencies with `npm install` and you're project should be ready for develpment. 
 
-##What's included?
+## What's included?
 This template comes packaged with a Gruntfile that defines common development tasks, as well as some opinionated biolerplate that works well with USA TODAY's interactive publishing process.
 
 Also included are some usefull base-level styles and some common libraries and packages.
@@ -112,7 +112,7 @@ define(
 
 ```
 
-###Angular support
+### Angular support
 
 The most recent version of this template includes Angular as a potential dev dependency (as the `angular` module).
 
@@ -201,7 +201,7 @@ define([], function() {
 });
 ```
 
-##Deploying for a USA TODAY static page
+## Deploying for a USA TODAY static page
 In order to build a deployable version of your css and javascript files, run 
 
 ```
